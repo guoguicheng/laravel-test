@@ -17,10 +17,11 @@
 
         <h2>当前登录用户：</h2>
         <h1 id="uname">未登录</h1>
+        <input type="hidden" id="tok" value="" />
     </div>
     <script type="text/javascript">
         $(function() {
-            var tok = "{{!! $token??'' !!}}";
+            var tok = $("#tok").val();
             if (tok) {
                 localStorage.setItem('token', tok);
                 //location.href = '/';
