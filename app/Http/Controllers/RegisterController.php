@@ -49,8 +49,8 @@ class RegisterController extends Controller
                 'grant_type' => 'password',
                 'username' => $request->email,
                 'password' => $request->password,
-                'client_id' => 5,
-                'client_secret' => 'YwJ1pjaj3TxWR5NwfoIiL3y3tO7kbsti7fpE6Oj9',
+                'client_id' => env('CLIENT_ID'),
+                'client_secret' => env('CLIENT_SECRET'),
                 'scopt' => '*'
             ]
         ]);
