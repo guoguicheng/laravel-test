@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class CallbackController extends Controller
 {
-    public function lineOauthCallback(Request $request, Client $http)
+    public function lineOauthCallback(Request $request, Client $http, User $user)
     {
         $code = $request->get('code', '');
         $state = $request->get('state', '');
@@ -16,29 +16,22 @@ class CallbackController extends Controller
         $params = [
             'grant_type' => 'authorization_code',
             'code' => $code,
-            'redirect_uri' => urlencode(config('app.url') . '/callback/line/token'),
             'client_id' => env('LINE_CLIENT_ID'),
             'client_secret' => env('LINE_CLIENT_SECRET')
         ];
         $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/token', [
             'form_params' => $params,
         ]);
-    }
 
-    public function lineOauthTokenCallback(Request $request, Client $http, User $user)
-    {
-        $data = $request->only(['access_token', 'expires_in', 'id_token', 'refresh_token', 'scope', 'token_type']);
-
+        // [access_token,expires_in,id_token,refresh_token,scope,token_type]
+        $lineToken = json_decode((string)$resp->getBody(), true);
         $params = [
-            'id_token' => $data['id_token'],
+            'id_token' => $lineToken['id_token'],
             'client_id' => env('LINE_CLIENT_ID'),
             'client_secret' => 'a1f8153433b456af8c593ea4ac1c1467'
         ];
         $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/verify', [
             'form_params' => $params,
-            'headers' => [
-                'Content-Type' => 'application/x-www-form-urlencoded',
-            ]
         ]);
 
         $pwd = 'Acdid274hlHLdlsdfs_|^';
