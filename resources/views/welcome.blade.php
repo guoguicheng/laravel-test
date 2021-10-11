@@ -20,7 +20,7 @@
     </div>
     <script type="text/javascript">
         $(function() {
-            var tok = "{{$token??''}}";
+            var tok = "{{!! $token??'' !!}}";
             if (tok) {
                 localStorage.setItem('token', tok);
                 //location.href = '/';
