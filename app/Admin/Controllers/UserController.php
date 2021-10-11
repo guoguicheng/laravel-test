@@ -31,7 +31,7 @@ class UserController extends AdminController
         $grid->column('email', __('Email'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-        $grid->column('pidInfo.name', __('Pid'));
+        $grid->column('pidInfo.name', __('Pid'))->default(0);
         $grid->column('role', __('Role'))->replace(User::ROLE_LIST);
         $grid->column('enable', __('Enable'))->editable('select', [
             User::ENABLE_FALSE => 'disable', User::ENABLE_TRUE => 'enable'
@@ -53,8 +53,6 @@ class UserController extends AdminController
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
         $show->field('email', __('Email'));
-        $show->field('password', __('Password'));
-        $show->field('remember_token', __('Remember token'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
         $show->field('pidInfo.name', __('Pid'));
@@ -73,13 +71,12 @@ class UserController extends AdminController
     {
         $form = new Form(new User());
 
-        $form->text('name', __('Name'));
-        $form->email('email', __('Email'));
-        $form->password('password', __('Password'));
-        $form->text('remember_token', __('Remember token'));
-        $form->number('pidInfo.name', __('Pid'));
-        $form->number('role', __('Role'))->default(4);
-        $form->switch('enable', __('Enable'))->default(2);
+        $form->text('name', __('Name'))->required();
+        $form->email('email', __('Email'))->required();
+        $form->password('password', __('Password'))->required();
+        $form->number('pid', __('Pid'));
+        $form->number('role', __('Role'))->default(4)->required();
+        $form->number('enable', __('Enable'))->default(2)->required();
 
         return $form;
     }

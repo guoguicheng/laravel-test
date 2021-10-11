@@ -81,6 +81,9 @@ class Handler extends ExceptionHandler
      */
     protected function reportError($context)
     {
+        if (config('app.env') == 'local') {
+            return;
+        }
         $url = 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=33658252-035d-48a6-be1d-90c33f9113a8';
 
         $data = json_encode(['msgtype' => 'markdown', 'markdown' => [
