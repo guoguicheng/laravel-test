@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:6',
+            'name' => 'required|min:2',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
             'role' => ['required', Rule::in([User::ROLE_SCHOOL, User::ROLE_TEACHER, User::ROLE_STUDENT]),],
