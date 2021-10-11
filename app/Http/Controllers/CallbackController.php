@@ -69,6 +69,6 @@ class CallbackController extends Controller
             )->toDateTimeString()
         ];
 
-        return view('welcome', ['token' => json_encode($token)]);
+        return view('welcome')->with('token', json_encode($token));
     }
 }
