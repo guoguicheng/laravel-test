@@ -40,7 +40,6 @@ class CallbackController extends Controller
         ]);
         // ['iss', 'sub', 'aud', 'exp', 'iat', 'nonce', 'amr', 'name', 'picture', 'email']
         $data = json_decode((string)$resp->getBody(), true);
-        dump($data);
         if (!empty($data['error'])) {
             echo ('error:' . $data['error'] . ' error_description:' . $data['error_description']);
             return;
