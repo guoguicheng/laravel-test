@@ -45,14 +45,13 @@ class CallbackController extends Controller
             echo ('error:' . $data['error'] . ' error_description:' . $data['error_description']);
             return;
         }
-
-        $pwd = 'Acdid274hlHLdlsdfs_|^';
+        
         $uinfo = $user->where('email', $data['email'])->first();
         if (empty($uinfo)) {
             $data = [
                 'name' => $data['name'],
                 'email' => $data['email'],
-                'password' => bcrypt($pwd),
+                'password' => '',
                 'enable' =>  User::ENABLE_TRUE,
                 'role' => User::ROLE_STUDENT
             ];
