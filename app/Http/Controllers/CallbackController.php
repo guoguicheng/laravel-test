@@ -19,7 +19,9 @@ class CallbackController extends Controller
             'redirect_uri' => urlencode(config('app.url') . '/callback/line/token'),
             'client_id' => env('LINE_CLIENT_ID'),
             'client_secret' => env('LINE_CLIENT_SECRET')
-        ];dump($params);die;
+        ];
+        dump($params);
+        die;
         $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/token', [
             'form_params' => $params,
             'headers' => [
@@ -28,7 +30,7 @@ class CallbackController extends Controller
         ]);
     }
 
-    public function lineOauthTokenCallback(Request $request, Client $http)
+    public function lineOauthTokenCallback(Request $request, Client $http, User $user)
     {
         $data = $request->only(['access_token', 'expires_in', 'id_token', 'refresh_token', 'scope', 'token_type']);
 
@@ -43,12 +45,10 @@ class CallbackController extends Controller
                 'Content-Type' => 'application/x-www-form-urlencoded',
             ]
         ]);
-    }
 
-    public function lineOauthUinfoCallback(Request $request, Client $http, User $user)
-    {
         $pwd = 'Acdid274hlHLdlsdfs_|^';
-        $data = $request->only(['iss', 'sub', 'aud', 'exp', 'iat', 'nonce', 'amr', 'name', 'picture', 'email']);
+        // ['iss', 'sub', 'aud', 'exp', 'iat', 'nonce', 'amr', 'name', 'picture', 'email']
+        $data = json_decode((string)$resp->getBody(), true);
 
         $uinfo = $user->where('email', $data['email'])->first();
         if (empty($uinfo)) {
