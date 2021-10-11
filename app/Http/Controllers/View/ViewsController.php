@@ -21,7 +21,7 @@ class ViewsController extends Controller
         $lineOauth = 'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=' .
             env('LINE_CLIENT_ID') . '&redirect_uri=' . urlencode(config('app.url') . '/callback/line/callback') .
             '&state=' . time() . str_random(random_int(20, 30)) .
-            '&scope=profile%20openid%20email&nonce=' . time();
+            '&scope=profile email&nonce=' . time();
         return view('login', ['lineOauth' => $lineOauth]);
     }
 

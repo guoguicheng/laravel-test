@@ -34,7 +34,6 @@ class CallbackController extends Controller
         $params = [
             'id_token' => $lineToken['id_token'],
             'client_id' => env('LINE_CLIENT_ID'),
-            'client_secret' => env('LINE_CLIENT_SECRET')
         ];
         $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/verify', [
             'form_params' => $params,
