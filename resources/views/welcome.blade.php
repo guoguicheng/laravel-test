@@ -24,7 +24,7 @@
             var tok = $("#tok").val();
             if (tok) {
                 localStorage.setItem('token', tok);
-                //location.href = '/';
+                location.href = '/';
                 return;
             }
             var token = JSON.parse(localStorage.getItem('token'));
