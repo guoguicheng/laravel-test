@@ -20,6 +20,10 @@
     </div>
     <script type="text/javascript">
         $(function() {
+            var tok = "{{$token??''}}";
+            if (tok) {
+                localStorage.setItem('token', tok);
+            }
             var token = JSON.parse(localStorage.getItem('token'));
             var tk = token.token_type + ' ' + token.access_token;
             var data = {};

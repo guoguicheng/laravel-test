@@ -18,3 +18,9 @@ Route::get('/stulist', 'View\ViewsController@stulist');
 Route::get('/teacherlist', 'View\ViewsController@teacherlist');
 Route::get('/teacheralllist', 'View\ViewsController@teacheralllist');
 Route::get('/followlist', 'View\ViewsController@followlist');
+
+Route::prefix('callback')->group(function () {
+    Route::get('/line/callback', 'CallbackController@lineOauthCallback');
+    Route::get('/line/callback/token', 'CallbackController@lineOauthTokenCallback');
+    Route::get('/line/callback/uinfo', 'CallbackController@lineOauthUinfoCallback');
+});

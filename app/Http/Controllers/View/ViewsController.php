@@ -18,7 +18,10 @@ class ViewsController extends Controller
 
     public function login(Request $request)
     {
-        return view('login');
+        $lineOauth = 'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=' .
+            env('LINE_CLIENT_ID') . '&redirect_uri=' . urlencode(config('app.url')) . '&state=12345abcde' .
+            '&scope=profile%20openid&nonce=09876xyz';
+        return view('login', ['lineOauth' => $lineOauth]);
     }
 
     public function stulist(Request $request)

@@ -23,7 +23,12 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="password" placeholder="Password">
             </div>
-            <button type="button" id="submit" class="btn btn-default">Login</button>
+            <div class="form-group">
+                <label>第三方登录:</label>
+                <a href="{{$lineOauth}}">Line</a>
+
+                <button type="button" id="submit" class="btn btn-default pull-right">Login</button>
+            </div>
         </form>
     </div>
     <script type="text/javascript">
