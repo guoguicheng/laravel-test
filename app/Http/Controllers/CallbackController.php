@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
@@ -23,9 +24,13 @@ class CallbackController extends Controller
         $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/token', [
             'form_params' => $params,
         ]);
-
         // [access_token,expires_in,id_token,refresh_token,scope,token_type]
         $lineToken = json_decode((string)$resp->getBody(), true);
+        if (!empty($lineToken['error'])) {
+            echo ('error:' . $lineToken['error'] . ' error_description:' . $lineToken['error_description']);
+            return;
+        }
+
         $params = [
             'id_token' => $lineToken['id_token'],
             'client_id' => env('LINE_CLIENT_ID'),
@@ -34,11 +39,14 @@ class CallbackController extends Controller
         $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/verify', [
             'form_params' => $params,
         ]);
-
-        $pwd = 'Acdid274hlHLdlsdfs_|^';
         // ['iss', 'sub', 'aud', 'exp', 'iat', 'nonce', 'amr', 'name', 'picture', 'email']
         $data = json_decode((string)$resp->getBody(), true);
+        if (!empty($data['error'])) {
+            echo ('error:' . $data['error'] . ' error_description:' . $data['error_description']);
+            return;
+        }
 
+        $pwd = 'Acdid274hlHLdlsdfs_|^';
         $uinfo = $user->where('email', $data['email'])->first();
         if (empty($uinfo)) {
             $data = [
@@ -51,18 +59,14 @@ class CallbackController extends Controller
             User::create($data);
         }
 
-        $resp = $this->http->post(config('app.url') . '/oauth/token', [
-            'form_params' => [
-                'grant_type' => 'password',
-                'username' => $data['email'],
-                'password' => $pwd,
-                'client_id' => env('CLIENT_ID'),
-                'client_secret' => env('CLIENT_SECRET'),
-                'scopt' => '*'
-            ]
-        ]);
-
-        $token = $resp->getBody();
+        $tokenResult =  $uinfo->createToken('Personal Access Token', ['*']);
+        $token = [
+            'access_token' => $tokenResult->accessToken,
+            'token_type' => 'Bearer',
+            'expires_at' => Carbon::parse(
+                $tokenResult->token->expires_at
+            )->toDateTimeString()
+        ];
 
         return view('home', ['token' => $token]);
     }
