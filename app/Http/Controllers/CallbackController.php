@@ -16,10 +16,10 @@ class CallbackController extends Controller
         $params = [
             'grant_type' => 'authorization_code',
             'code' => $code,
-            'redirect_uri' => urlencode(config('app.url') . '/callback/line/token'),
+            'redirect_uri' => config('app.url') . '/callback/line/token',
             'client_id' => env('LINE_CLIENT_ID'),
             'client_secret' => env('LINE_CLIENT_SECRET')
-        ];dump($params);die;
+        ];
         $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/token', [
             'form_params' => $params,
             'headers' => [
