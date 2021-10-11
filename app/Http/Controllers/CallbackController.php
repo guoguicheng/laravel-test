@@ -16,7 +16,7 @@ class CallbackController extends Controller
         $params = [
             'grant_type' => 'authorization_code',
             'code' => $code,
-            'redirect_uri' => config('app.url') . '/callback/line/token',
+            'redirect_uri' => urlencode(config('app.url') . '/callback/line/token'),
             'client_id' => env('LINE_CLIENT_ID'),
             'client_secret' => env('LINE_CLIENT_SECRET')
         ];
