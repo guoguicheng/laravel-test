@@ -45,7 +45,7 @@ class CallbackController extends Controller
             echo ('error:' . $data['error'] . ' error_description:' . $data['error_description']);
             return;
         }
-        
+
         $uinfo = $user->where('email', $data['email'])->first();
         if (empty($uinfo)) {
             $data = [
@@ -55,7 +55,7 @@ class CallbackController extends Controller
                 'enable' =>  User::ENABLE_TRUE,
                 'role' => User::ROLE_STUDENT
             ];
-            User::create($data);
+            $uinfo = User::create($data);
         }
 
         $tokenResult =  $uinfo->createToken('Personal Access Token', ['*']);
