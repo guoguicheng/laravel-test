@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 Route::get('/register', 'View\ViewsController@register');
 Route::get('/login', 'View\ViewsController@login');
 Route::get('/stulist', 'View\ViewsController@stulist');
