@@ -45,7 +45,10 @@ class CallbackController extends Controller
             echo ('error:' . $data['error'] . ' error_description:' . $data['error_description']);
             return;
         }
-
+        if(empty($data['email'])){
+            echo 'Line 账号未绑定Email';
+            return;
+        }
         $uinfo = $user->where('email', $data['email'])->first();
         if (empty($uinfo)) {
             $data = [
@@ -67,6 +70,6 @@ class CallbackController extends Controller
             )->toDateTimeString()
         ];
 
-        return view('home', ['token' => $token]);
+        return view('welcome', ['token' => $token]);
     }
 }
