@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\AdminRoles;
+use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -16,15 +16,15 @@ class AdminRolesSeeder extends Seeder
         $date = date('Y-m-d H:i:s', time());
         $data = [
             [
-                'id' => AdminRoles::ROLE_SCHOOL, 'slug' => 'School', 'name' => 'school', 'created_at' => $date,
+                'id' => User::ROLE_SCHOOL, 'slug' => 'School', 'name' => 'school', 'created_at' => $date,
                 'updated_at' => $date
             ],
             [
-                'id' => AdminRoles::ROLE_TEACHER, 'slug' => 'Teacher', 'name' => 'teacher', 'created_at' => $date,
+                'id' => User::ROLE_TEACHER, 'slug' => 'Teacher', 'name' => 'teacher', 'created_at' => $date,
                 'updated_at' => $date
             ],
             [
-                'id' => AdminRoles::ROLE_STUDENT, 'slug' => 'Student', 'name' => 'student', 'created_at' => $date,
+                'id' => User::ROLE_STUDENT, 'slug' => 'Student', 'name' => 'student', 'created_at' => $date,
                 'updated_at' => $date
             ],
         ];
