@@ -17,7 +17,7 @@
 
         <h2>当前登录用户：</h2>
         <h1 id="uname">未登录</h1>
-        <input type="hidden" id="tok" value="" />
+        <input type="hidden" id="tok" value='{!! $token??"" !!}' />
     </div>
     <script type="text/javascript">
         $(function() {
