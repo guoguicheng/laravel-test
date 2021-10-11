@@ -74,9 +74,12 @@ class UserController extends AdminController
         $form->text('name', __('Name'))->required();
         $form->email('email', __('Email'))->required();
         $form->password('password', __('Password'))->required();
-        $form->number('pid', __('Pid'));
+        $form->number('pid', __('Pid'))->default(0);
         $form->number('role', __('Role'))->default(4)->required();
         $form->number('enable', __('Enable'))->default(2)->required();
+        $form->saving(function (Form $form) {
+            $form->password = bcrypt($form->password);
+        });
 
         return $form;
     }
