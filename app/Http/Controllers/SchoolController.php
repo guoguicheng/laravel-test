@@ -41,7 +41,7 @@ class SchoolController extends Controller
             throw new ApiException('只有学校能邀请老师');
         }
         $title = $schoolInfo->name . '学校邀请您成为老师';
-        $body = '访问 ' . config('app.url') . '/register?school_id=' . $schoolInfo->id . ' 完成注册';
+        $body = '访问 ' . config('app.url') . '/register?token=' . $schoolInfo->id . ' 完成注册';
         $bSent = $mail->sendEmail($request->post('email'), $title, $body);
         if (!$bSent) {
             throw new ApiException('邮件发送失败');
