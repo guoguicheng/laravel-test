@@ -24,7 +24,7 @@ class WsMessage extends RowAction
             'from' => $uinfo->id, 'name' => $uinfo->name, 'message' => $msg
         ];
         $pusher->sendTo('chat', $model->id, '', $data);
-        //$this->sendLine($model->line_openid, $msg);
+        $this->sendLine($model->line_openid, $msg);
 
         return $this->response()->success('Success message.')->refresh();
     }
