@@ -2,12 +2,36 @@
 
 namespace App\Http\Controllers\View;
 
+use App\Exceptions\WebException;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use Illuminate\Support\Facades\Validator;
 
 class ViewsController extends Controller
 {
+    public function error(Request $request)
+    {
+        $msg = $request->get('msg');
+        return view('error')->with('msg', $msg);
+    }
+    public function chat(Request $request)
+    {
+        $data = $request->only(['to', 'name', 'msg']);
+        $valid = Validator::make($data, [
+            'to' => 'required|min:1',
+            'name' => 'required|min:1',
+            'msg' => 'nullable'
+        ]);
+        if ($valid->fails()) {
+            throw new WebException('参数有误');
+        }
+        return view('chat')->with('to', $data['to'])->with('name', $data['name'])->with('msg', $data['msg'] ?? '');
+    }
+    public function websocket(Request $request)
+    {
+        return view('websocket');
+    }
     public function register(Request $request)
     {
         $token = $request->get('token', '');

@@ -14,6 +14,7 @@
 <body>
     <div class="center">
         @include('block.header')
+        @include('block.msgbar')
         <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>

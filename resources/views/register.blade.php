@@ -14,6 +14,7 @@
 <body>
     <div class="center">
         @include('block.header')
+        @include('block.msgbar')
         <form>
             <input type="hidden" id="token" value="{{$token}}" />
             <div class="form-group">

@@ -14,12 +14,14 @@
 <body>
     <div class="center">
         @include('block.header')
+        @include('block.msgbar')
         <table class="table">
             <caption>教师列表</caption>
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>名称</th>
+                    <th>消息</th>
                 </tr>
             </thead>
             <tbody id="rows">
@@ -37,8 +39,11 @@
                 console.log(data);
                 var row = '';
                 for (var i = 0; i < data.length; i++) {
-                    row += '<tr><td>' + data[i].id + '</td><td>' + data[i].name + '</td></tr>';
+                    row += '<tr><td>' + data[i].id + '</td><td>' + data[i].name +
+                        '</td><td><a href="/chat?to=' + data[i].id + '&name=' + data[i].name +
+                        '"><span class="glyphicon glyphicon-comment"></span></a></td></tr>';
                 }
+                row += ''
                 $(row).appendTo("#rows");
             }, tk);
 

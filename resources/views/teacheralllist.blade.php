@@ -14,6 +14,7 @@
 <body>
     <div class="center">
         @include('block.header')
+        @include('block.msgbar')
         <table class="table">
             <caption>教师列表</caption>
             <thead>
@@ -21,6 +22,7 @@
                     <th>ID</th>
                     <th>名称</th>
                     <th>操作</th>
+                    <th>消息</th>
                 </tr>
             </thead>
             <tbody id="rows">
@@ -39,12 +41,14 @@
                 var row = '';
                 for (var i = 0; i < data.length; i++) {
                     row += '<tr><td>' + data[i].id + '</td><td>' + data[i].name;
+                    var chatTd = '<td><a href="/chat?to=' + data[i].id + '&name=' + data[i].name +
+                        '"><span class="glyphicon glyphicon-comment"></span></a><td>';
                     if (data[i].following) {
                         row += '</td><td><button type="button" class="btn btn-default unfollow" tid="' +
-                            data[i].id + '">取消关注</button></td></tr>';
+                            data[i].id + '">取消关注</button></td>' + chatTd + '</tr>';
                     } else {
                         row += '</td><td><button type="button" class="btn btn-success follow" tid="' +
-                            data[i].id + '">关注</button></td></tr>';
+                            data[i].id + '">关注</button></td>' + chatTd + '</tr>';
                     }
                 }
                 $(row).appendTo("#rows");

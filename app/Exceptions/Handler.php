@@ -14,7 +14,8 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        ApiException::class
+        ApiException::class,
+        WebException::class
     ];
 
     /**
@@ -66,6 +67,9 @@ class Handler extends ExceptionHandler
             ];
             return response()->json($result, $exception->code)
                 ->setEncodingOptions(JSON_UNESCAPED_UNICODE);
+        }
+        if ($exception instanceof WebException) {
+            return redirect('/error?msg=' . $exception->message);
         }
         return parent::render($request, $exception);
     }

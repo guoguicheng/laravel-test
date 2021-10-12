@@ -14,6 +14,7 @@
 <body>
     <div class="center">
         @include('block.header')
+        @include('block.msgbar')
         <table class="table">
             <caption>学生列表</caption>
             <thead>

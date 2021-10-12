@@ -6,6 +6,14 @@ use Illuminate\Support\Facades\Mail;
 
 class MailService
 {
+    /**
+     * 发送文本邮件
+     *
+     * @param string $email
+     * @param string $title
+     * @param string $msg
+     * @return boolean
+     */
     public function sendEmail(string $email, string $title, string $msg): bool
     {
         // 纯文本信息邮件测试

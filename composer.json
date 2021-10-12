@@ -13,10 +13,11 @@
         "laravel/passport": "4.0.3",
         "laravel/tinker": "~1.0",
         "lcobucci/jwt": "3.3.3",
-        "silex/silex": "^2.0.4",
         "monolog/monolog": "^1.22",
-        "twig/twig": "^2.0",
-        "symfony/twig-bridge": "^3"
+        "pusher/pusher-php-server": "5.0.3",
+        "silex/silex": "^2.0.4",
+        "symfony/twig-bridge": "^3",
+        "twig/twig": "^2.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

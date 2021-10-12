@@ -14,6 +14,7 @@
 <body>
     <div class="center">
         @include('block.header')
+        @include('block.msgbar')
 
         <h2>当前登录用户：</h2>
         <h1 id="uname">未登录</h1>
