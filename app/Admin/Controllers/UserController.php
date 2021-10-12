@@ -2,6 +2,7 @@
 
 namespace App\Admin\Controllers;
 
+use App\Admin\Actions\Post\WsMessage;
 use App\User;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -36,6 +37,10 @@ class UserController extends AdminController
         $grid->column('enable', __('Enable'))->editable('select', [
             User::ENABLE_FALSE => 'disable', User::ENABLE_TRUE => 'enable'
         ]);
+        //$grid->column('id')->action(SendMsgAction::class);
+        $grid->actions(function ($actions) {
+            $actions->add(new WsMessage);
+        });
 
         return $grid;
     }
