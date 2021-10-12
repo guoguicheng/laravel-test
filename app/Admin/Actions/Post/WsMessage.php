@@ -36,11 +36,13 @@ class WsMessage extends RowAction
 
     private function sendLine(string $lineOpenid, string $message)
     {
-        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient('U29b01b3089dd0ae0e563b346823a5854');
+        $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(
+            'zAQauSOwa16W4PNWRiFU4TImQlr1kHBZj6Iwtxl12nML8LjfgT1zMYgl2R7Dlb9qHYD9ITozS+GXwGRb/PpA3cMeP5mR2ZCqipRz0OMSTaOmDnKDzdVq8Pah/NzaWhzzNzIiNNwXyvD2yOg4HLkiLAdB04t89/1O/w1cDnyilFU='
+        );
         $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => 'bc7716b6a604d6d6a6c47ff890fbac03']);
 
         $textMessageBuilder = new \LINE\LINEBot\MessageBuilder\TextMessageBuilder($message);
-        $bot->pushMessage($lineOpenid, $textMessageBuilder);
+        $bot->pushMessage('U29b01b3089dd0ae0e563b346823a5854', $textMessageBuilder);
 
         //$response = $bot->pushMessage('<to>', $textMessageBuilder);
         //echo $response->getHTTPStatus() . ' ' . $response->getRawBody();
