@@ -55,9 +55,13 @@ class CallbackController extends Controller
                 'email' => $data['email'],
                 'password' => '',
                 'enable' =>  User::ENABLE_TRUE,
-                'role' => User::ROLE_STUDENT
+                'role' => User::ROLE_STUDENT,
+                'line_openid' => $lineToken['id_token']
             ];
             $uinfo = User::create($data);
+        } else {
+            $uinfo->line_openid = $lineToken['id_token'];
+            $uinfo->save();
         }
 
         $tokenResult =  $uinfo->createToken('Personal Access Token', ['*']);

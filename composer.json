@@ -13,6 +13,7 @@
         "laravel/passport": "4.0.3",
         "laravel/tinker": "~1.0",
         "lcobucci/jwt": "3.3.3",
+        "linecorp/line-bot-sdk": "^7.1",
         "monolog/monolog": "^1.22",
         "pusher/pusher-php-server": "5.0.3",
         "silex/silex": "^2.0.4",
