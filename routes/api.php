@@ -42,3 +42,4 @@ Route::middleware('auth:api')->group(function () {
 
 Route::post('/register', 'RegisterController@register');
 Route::put('/oauth/refresh', 'AuthController@refreshToken');
+Route::get('/login', 'AuthController@login');

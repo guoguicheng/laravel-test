@@ -37,14 +37,10 @@
 
             $("#submit").on('click', function() {
                 var data = {
-                    'grant_type': 'password',
                     'username': $("#email").val(),
-                    'password': $("#password").val(),
-                    'client_id': "{{env('CLIENT_ID','')}}",
-                    'client_secret': "{{env('CLIENT_SECRET','')}}",
-                    'scope': '*'
+                    'password': $("#password").val()
                 };
-                request('/oauth/token', 'post', data, function(data) {
+                request('/login', 'post', data, function(data) {
                     localStorage.setItem('token', JSON.stringify(data));
                     alert('登录成功');
                     window.location.href = '/';

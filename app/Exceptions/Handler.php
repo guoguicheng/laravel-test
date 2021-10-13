@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use App\Exceptions\ApiException;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -70,6 +71,10 @@ class Handler extends ExceptionHandler
         }
         if ($exception instanceof WebException) {
             return redirect('/error?msg=' . $exception->message);
+        }
+        if ($exception instanceof ValidationException) {
+            $message = $exception->validator->getMessageBag()->first();
+            return response()->json(['message' => $message, 'data' => []], 422);
         }
         return parent::render($request, $exception);
     }
