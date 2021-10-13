@@ -59,6 +59,10 @@
         width: 600px;
         margin: 0 auto;
     }
+
+    .hide {
+        display: none;
+    }
 </style>
 <!-- 新 Bootstrap 核心 CSS 文件 -->
 <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
