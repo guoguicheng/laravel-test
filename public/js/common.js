@@ -13,16 +13,7 @@ function request(url, type, data, callback, token) {
         headers: headers,
         error: function (xhr) {
             console.log(xhr);
-            if (xhr.responseJSON.errors) {
-                for (var item in xhr.responseJSON.errors) {
-                    for (var j = 0; j < xhr.responseJSON.errors[item].length; j++) {
-                        alert(xhr.responseJSON.errors[item][j]);
-                        return;
-                    }
-                }
-            } else {
-                alert(xhr.responseJSON.message);
-            }
+            alert(xhr.responseJSON.message);
         }
     });
 }

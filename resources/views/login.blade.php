@@ -40,7 +40,7 @@
                     'username': $("#email").val(),
                     'password': $("#password").val()
                 };
-                request('/login', 'post', data, function(data) {
+                request('/api/login', 'GET', data, function(data) {
                     localStorage.setItem('token', JSON.stringify(data));
                     alert('登录成功');
                     window.location.href = '/';

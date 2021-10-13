@@ -24,7 +24,7 @@ class AuthController extends Controller
         ]);
         $token = json_decode((string)$resp->getBody(), true);
 
-        return response()->json(['token' => $token]);
+        return response()->json($token);
     }
 
     public function refreshToken(Request $request, Client $http)
