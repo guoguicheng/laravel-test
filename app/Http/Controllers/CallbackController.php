@@ -6,6 +6,7 @@ use App\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Throwable;
 
 class CallbackController extends Controller
 {
@@ -21,9 +22,13 @@ class CallbackController extends Controller
             'client_id' => env('LINE_CLIENT_ID'),
             'client_secret' => env('LINE_CLIENT_SECRET')
         ];
-        $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/token', [
-            'form_params' => $params,
-        ]);
+        try {
+            $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/token', [
+                'form_params' => $params,
+            ]);
+        } catch (Throwable $e) {
+            die($e->getMessage());
+        }
         // [access_token,expires_in,id_token,refresh_token,scope,token_type]
         $lineToken = json_decode((string)$resp->getBody(), true);
         if (!empty($lineToken['error'])) {
@@ -35,9 +40,13 @@ class CallbackController extends Controller
             'id_token' => $lineToken['id_token'],
             'client_id' => env('LINE_CLIENT_ID'),
         ];
-        $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/verify', [
-            'form_params' => $params,
-        ]);
+        try {
+            $resp = $http->request('POST', 'https://api.line.me/oauth2/v2.1/verify', [
+                'form_params' => $params,
+            ]);
+        } catch (Throwable $e) {
+            die($e->getMessage());
+        }
         // ['iss', 'sub', 'aud', 'exp', 'iat', 'nonce', 'amr', 'name', 'picture', 'email']
         $data = json_decode((string)$resp->getBody(), true);
         if (!empty($data['error'])) {
