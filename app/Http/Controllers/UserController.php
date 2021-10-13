@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\ApiException;
-use App\Http\Requests\FollowRequest;
 use App\Http\Requests\UserRequest;
-use App\Models\Follows;
 use App\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
