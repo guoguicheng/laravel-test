@@ -28,7 +28,8 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'enable' => $request->role != User::ROLE_SCHOOL ? User::ENABLE_TRUE : User::ENABLE_FALSE,
-            'role' => $request->role ?? User::ROLE_STUDENT
+            'role' => $request->role ?? User::ROLE_STUDENT,
+            'line_openid' => ''
         ];
 
         if ($inviteToken) {
