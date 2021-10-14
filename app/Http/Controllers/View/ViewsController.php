@@ -64,6 +64,6 @@ class ViewsController extends Controller
 
     public function followlist(Request $request)
     {
-        return view('followList');
+        return view('followlist');
     }
 }
