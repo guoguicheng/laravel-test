@@ -23,6 +23,9 @@
     php artisan db:seed --class=AdminRolesSeeder
     # heroku 环境 则使用heroku run <command>
 
+    # passport key 下载
+    php artisan passport:synckeys
+
     # 启动
     heroku ps:scale web=1
     # 打开浏览器
