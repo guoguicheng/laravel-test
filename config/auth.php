@@ -47,6 +47,8 @@ return [
         ],
     ],
 
+    'other_keys' => env('OTHER_PASSPORT_KEYS', true),
+
     /*
     |--------------------------------------------------------------------------
     | User Providers

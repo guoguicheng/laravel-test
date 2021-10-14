@@ -26,7 +26,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
         Passport::routes();
-        Passport::loadKeysFrom(storage_path('/secret-keys/'));
+        if (config('auth.other_keys')) {
+            Passport::loadKeysFrom(storage_path('/secret-keys/'));
+        }
         //
     }
 }
