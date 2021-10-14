@@ -28,16 +28,16 @@
         <div id="chat_msg"></div>
 
         <div class="row">
-            <form class="bs-example bs-example-form" role="form">
+            <form class="bs-example bs-example-form" role="form" onsubmit="javascript:return false;">
                 <div class="col-lg-12">
                     <div class="input-group col-lg-12">
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                {{$name}}
+                                与 {{$name}} 对话
                             </div>
                             <div class="panel-body" id="pannel-body">
                                 @if($msg)
-                                <p class="from">{{$msg}}</p>
+                                <p class="from">{{$name}}：{{$msg}}</p>
                                 @endif
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                             window.open(href, '_blank');
                         })
                     } else {
-                        $('<p class="from">' + data.message + '</p>').appendTo('#pannel-body');
+                        $('<p class="from">' + data.name + '：' + data.message + '</p>').appendTo('#pannel-body');
                     }
                 });
                 console.log('websocket 绑定成功');
@@ -100,6 +100,15 @@
 
             $("#send").on('click', function(e) {
                 e.stopPropagation();
+                sendMsg();
+            })
+            $(document).keyup(function(event) {
+                if (event.keyCode == 13) {
+                    sendMsg();
+                }
+            });
+
+            function sendMsg() {
                 var msg = $("#msg").val();
                 var data = {
                     'to': to,
@@ -107,9 +116,9 @@
                 }
                 request('/api/message/to', 'POST', data, function(data) {
                     $("#msg").val('');
-                    $('<p class="me">' + msg + '</p>').appendTo('#pannel-body');
+                    $('<p class="me">你：' + msg + '</p>').appendTo('#pannel-body');
                 }, tk);
-            })
+            }
 
         })
     </script>
